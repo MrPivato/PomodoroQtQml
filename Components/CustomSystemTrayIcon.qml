@@ -34,6 +34,7 @@ Item {
             if (mIsMinimized) {
                 window.show();
                 window.raise();
+                window.requestActivate();
             } else {
                 window.hide();
             }
