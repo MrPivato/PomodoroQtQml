@@ -9,14 +9,17 @@ CountDownTimer::CountDownTimer(QObject *parent) : QObject(parent),
     m_countDownActive(false),
     m_timerAlreadyStarted(false),
     m_longBreakCounter(0),
-    m_currentAction(PomodoroAction),
     m_longBreakInterval(4),
+    m_currentAction(PomodoroAction),
+    m_currentActionStr(QString()),
     m_alarm(":/Resources/beep.wav"),
     m_settings(new QSettings)
 {
     readSettings();
 
     m_alarm.setLoops(2);
+
+    setCurrentActionStr(POMODORO_ACT_STR);
 
     QObject::connect(&m_timer, &QTimer::timeout, [=](){
         setRemainingTime(m_remainingTime.addSecs(-1));
@@ -43,15 +46,19 @@ void CountDownTimer::evaluateActionToTimer()
     switch (m_currentAction) {
     case PomodoroAction:
         setRemainingTime(m_pomodoroTime);
+        setCurrentActionStr(POMODORO_ACT_STR);
         break;
     case ShortBreakAction:
         setRemainingTime(m_shortBreakTime);
+        setCurrentActionStr(SHORTBREAK_ACT_STR);
         break;
     case LongBreakAction:
         setRemainingTime(m_longBreakTime);
+        setCurrentActionStr(LONGBREAK_ACT_STR);
         break;
     default:
         setRemainingTime(m_pomodoroTime);
+        setCurrentActionStr(POMODORO_ACT_STR);
         break;
     }
 }
@@ -109,24 +116,24 @@ void CountDownTimer::handleTimeout()
             if (m_longBreakCounter == m_longBreakInterval) {
                 m_currentAction = LongBreakAction;
                 m_longBreakCounter = 0;
-                emit timeoutReachedTimeTo("long break");
+                emit timeoutReachedTimeTo(LONGBREAK_ACT_STR);
             } else {
                 m_currentAction = ShortBreakAction;
                 m_longBreakCounter++;
-                emit timeoutReachedTimeTo("short break");
+                emit timeoutReachedTimeTo(SHORTBREAK_ACT_STR);
             }
             break;
         case ShortBreakAction:
             m_currentAction = PomodoroAction;
-            emit timeoutReachedTimeTo("pomodoro");
+            emit timeoutReachedTimeTo(POMODORO_ACT_STR);
             break;
         case LongBreakAction:
             m_currentAction = PomodoroAction;
-            emit timeoutReachedTimeTo("pomodoro");
+            emit timeoutReachedTimeTo(POMODORO_ACT_STR);
             break;
         default:
             m_currentAction = PomodoroAction;
-            emit timeoutReachedTimeTo("pomodoro");
+            emit timeoutReachedTimeTo(POMODORO_ACT_STR);
             break;
         }
 
@@ -267,11 +274,11 @@ void CountDownTimer::setCurrentAction(QString newCurrentActionString)
     int newCurrentAction;
     newCurrentActionString = newCurrentActionString.toUpper();
 
-    if (newCurrentActionString == "POMODORO") {
+    if (newCurrentActionString == POMODORO_ACT_STR) {
         newCurrentAction = PomodoroAction;
-    } else if(newCurrentActionString == "SHORT-BREAK") {
+    } else if(newCurrentActionString == SHORTBREAK_ACT_STR) {
         newCurrentAction = ShortBreakAction;
-    }else if(newCurrentActionString == "LONG-BREAK") {
+    }else if(newCurrentActionString == LONGBREAK_ACT_STR) {
         newCurrentAction = LongBreakAction;
     } else {
         return;
@@ -284,4 +291,17 @@ void CountDownTimer::setCurrentAction(QString newCurrentActionString)
     evaluateActionToTimer();
 
     emit currentActionChanged();
+}
+
+const QString &CountDownTimer::currentActionStr() const
+{
+    return m_currentActionStr;
+}
+
+void CountDownTimer::setCurrentActionStr(const QString &newCurrentActionStr)
+{
+    if (m_currentActionStr == newCurrentActionStr)
+        return;
+    m_currentActionStr = newCurrentActionStr;
+    emit currentActionStrChanged();
 }

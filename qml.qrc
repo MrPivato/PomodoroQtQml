@@ -7,5 +7,6 @@
         <file>Views/Settings.qml</file>
         <file>Components/CustomDial.qml</file>
         <file>Components/CustomSystemTrayIcon.qml</file>
+        <file>Views/LoadingScreen.qml</file>
     </qresource>
 </RCC>

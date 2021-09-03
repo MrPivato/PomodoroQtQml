@@ -36,6 +36,11 @@ Window {
     property string currentClockFaceColor: "#d9d9d9" // gray-5
     property string currentTextColor: "#262626" // gray-10
 
+    property string currentActionString: TimerClass.currentActionStr
+    readonly property string pomodoroActionStr: "POMODORO"
+    readonly property string shortBreakActionStr: "SHORT BREAK"
+    readonly property string longBreakActionStr: "LONG BREAK"
+
     function setPomodoroAsCurrentColorScheme() {
         currentBkgColor = pomodoroBkgColor;
         currentTimerChooserColor = pomodoroTimerChooserColor;
@@ -57,7 +62,10 @@ Window {
         currentTextColor = longBreakTextColor;
     }
 
-    Component.onCompleted: setPomodoroAsCurrentColorScheme();
+    Component.onCompleted: {
+        setPomodoroAsCurrentColorScheme();
+        pageLoader.sourceComponent = clockFaceUiComponent;
+    }
 
     Rectangle {
         id: uiContainer
@@ -77,7 +85,7 @@ Window {
 
         Loader {
             id: pageLoader
-            sourceComponent: clockFaceUiComponent
+            sourceComponent: loadingScreenUiComponent
             anchors.centerIn: parent
             width: parent.width * (6/10)
             height: parent.height * (7/10)
@@ -116,6 +124,13 @@ Window {
             id: settingsUiComponent
             Settings {
                 id: settingsView
+            }
+        }
+
+        Component {
+            id: loadingScreenUiComponent
+            LoadingScreen {
+                id: loadingScreenView
             }
         }
     }

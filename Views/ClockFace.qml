@@ -8,7 +8,48 @@ Item {
     property string mCfcTimerChooserColor: "#00FF00"
     property string mCfcClockFaceColor: "#0000FF"
     property string mCfcTextColor: "#AA0000"
-//    property string mCfcBtnBkg: "#00AA00"
+
+    function pomodoroBtnHighlight() {
+        pomodoroBtn.mBtnBkgColor = Qt.darker(mCfcBkgColor);
+        shortBreakBtn.mBtnBkgColor = mCfcBkgColor;
+        longBreakBtn.mBtnBkgColor = mCfcBkgColor;
+    }
+
+    function shortBreakBtnHighlight() {
+        pomodoroBtn.mBtnBkgColor = mCfcBkgColor;
+        shortBreakBtn.mBtnBkgColor = Qt.darker(mCfcBkgColor);
+        longBreakBtn.mBtnBkgColor = mCfcBkgColor;
+    }
+
+    function longBreakBtnHighlight() {
+        pomodoroBtn.mBtnBkgColor = mCfcBkgColor;
+        shortBreakBtn.mBtnBkgColor = mCfcBkgColor;
+        longBreakBtn.mBtnBkgColor = Qt.darker(mCfcBkgColor);
+    }
+
+    Connections {
+        target: TimerClass
+        function onTimeoutReachedTimeTo(wichTimer) {
+            wichTimer = wichTimer.toUpperCase();
+            if(wichTimer === pomodoroActionStr) {
+                pomodoroBtnHighlight();
+            } else if(wichTimer === shortBreakActionStr) {
+                shortBreakBtnHighlight();
+            } else if(wichTimer === longBreakActionStr) {
+                longBreakBtnHighlight();
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        if(currentActionString === pomodoroActionStr) {
+            pomodoroBtnHighlight();
+        } else if(currentActionString === shortBreakActionStr) {
+            shortBreakBtnHighlight();
+        } else if(currentActionString === longBreakActionStr) {
+            longBreakBtnHighlight();
+        }
+    }
 
     Rectangle {
         id: clockFace
@@ -30,8 +71,11 @@ Item {
             mBtnTxtColor: mCfcTextColor
             mBtnDefaultText: "Pomodoro"
             onMBtnClickedChanged: {
-                mBtnClicked ? TimerClass.setCurrentAction("pomodoro") : false;
-                setPomodoroAsCurrentColorScheme();
+                if(!TimerClass.countDownActive) {
+                    mBtnClicked ? TimerClass.setCurrentAction(pomodoroActionStr) : false;
+                    setPomodoroAsCurrentColorScheme();
+                    pomodoroBtnHighlight();
+                }
             }
         }
 
@@ -49,8 +93,11 @@ Item {
             mBtnTxtColor: mCfcTextColor
             mBtnDefaultText: "Short Break"
             onMBtnClickedChanged: {
-                mBtnClicked ? TimerClass.setCurrentAction("short-break") : false;
-                setShortBreakAsCurrentColorScheme();
+                if(!TimerClass.countDownActive) {
+                    mBtnClicked ? TimerClass.setCurrentAction(shortBreakActionStr) : false;
+                    setShortBreakAsCurrentColorScheme();
+                    shortBreakBtnHighlight();
+                }
             }
         }
 
@@ -68,8 +115,11 @@ Item {
             mBtnTxtColor: mCfcTextColor
             mBtnDefaultText: "Long Break"
             onMBtnClickedChanged: {
-                mBtnClicked ? TimerClass.setCurrentAction("long-break") : false;
-                setLongBreakAsCurrentColorScheme();
+                if(!TimerClass.countDownActive) {
+                    mBtnClicked ? TimerClass.setCurrentAction(longBreakActionStr) : false;
+                    setLongBreakAsCurrentColorScheme();
+                    longBreakBtnHighlight();
+                }
             }
         }
 

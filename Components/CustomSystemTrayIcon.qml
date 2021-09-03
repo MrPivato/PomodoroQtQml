@@ -8,17 +8,17 @@ Item {
         target: TimerClass
         function onTimeoutReachedTimeTo(wichTimer) {
             wichTimer = wichTimer.toUpperCase();
-            if(wichTimer === "POMODORO") {
+            if(wichTimer === pomodoroActionStr) {
                 setPomodoroAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,
                             "Time to get some work done.");
-            } else if(wichTimer === "SHORT BREAK") {
+            } else if(wichTimer === shortBreakActionStr) {
                 setShortBreakAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,
                             "Time for a pause.");
-            } else if(wichTimer === "LONG BREAK") {
+            } else if(wichTimer === longBreakActionStr) {
                 setLongBreakAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,

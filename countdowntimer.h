@@ -20,6 +20,7 @@ class CountDownTimer : public QObject
     Q_PROPERTY(int longBreakInterval READ longBreakInterval WRITE setLongBreakInterval NOTIFY longBreakIntervalChanged)
     Q_PROPERTY(bool countDownActive READ countDownActive WRITE setCountDownActive NOTIFY countDownActiveChanged)
     Q_PROPERTY(int currentAction READ currentAction WRITE setCurrentAction NOTIFY currentActionChanged)
+    Q_PROPERTY(QString currentActionStr READ currentActionStr WRITE setCurrentActionStr NOTIFY currentActionStrChanged)
 
 public:
     explicit CountDownTimer(QObject *parent = nullptr);
@@ -59,6 +60,9 @@ public:
     void setCurrentAction(int newCurrentAction);
     Q_INVOKABLE void setCurrentAction(QString newCurrentActionString);
 
+    const QString &currentActionStr() const;
+    void setCurrentActionStr(const QString &newCurrentActionStr);
+
 signals:
     void remainingTimeChanged();
     void pomodoroTimeChanged();
@@ -68,6 +72,8 @@ signals:
     void longBreakIntervalChanged();
     void currentActionChanged();
     void timeoutReachedTimeTo(QString wichTimer);
+
+    void currentActionStrChanged();
 
 private:
     QTimer m_timer;
@@ -79,8 +85,10 @@ private:
 
     bool m_timerAlreadyStarted;
     int m_longBreakCounter;
-    int m_currentAction;
     int m_longBreakInterval;
+
+    int m_currentAction;
+    QString m_currentActionStr;
     enum Actions {
         PomodoroAction = Qt::UserRole + 1,
         ShortBreakAction,
@@ -89,6 +97,10 @@ private:
 
     QSound m_alarm;
     QSettings m_settings;
+
+    const QString POMODORO_ACT_STR = "POMODORO";
+    const QString SHORTBREAK_ACT_STR = "SHORT BREAK";
+    const QString LONGBREAK_ACT_STR = "LONG BREAK";
 
     const QString POMODOROTIME_ST_STR = "timer/pomodoroTime";
     const QString SHORTBREAKTIME_ST_STR = "timer/shortBreakTime";
