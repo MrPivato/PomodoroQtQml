@@ -9,14 +9,17 @@ Item {
         function onTimeoutReachedTimeTo(wichTimer) {
             wichTimer = wichTimer.toUpperCase();
             if(wichTimer === "POMODORO") {
+                setPomodoroAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,
                             "Time to get some work done.");
             } else if(wichTimer === "SHORT BREAK") {
+                setShortBreakAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,
                             "Time for a pause.");
             } else if(wichTimer === "LONG BREAK") {
+                setLongBreakAsCurrentColorScheme();
                 systemTrayIcon.showMessage(
                             wichTimer,
                             "Time to get some rest.");
