@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Pomodoro Timer");
 
     QGuiApplication app(argc, argv);
+    app.setWindowIcon(QIcon(":/Resources/app_icon.png"));
+
     CountDownTimer countDownTimer;
 
     QQmlApplicationEngine engine;

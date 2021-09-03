@@ -3,5 +3,6 @@
         <file>Resources/clock_icon.png</file>
         <file>Resources/gear_icon.png</file>
         <file>Resources/beep.wav</file>
+        <file>Resources/app_icon.png</file>
     </qresource>
 </RCC>

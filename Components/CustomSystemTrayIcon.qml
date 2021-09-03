@@ -28,7 +28,7 @@ Item {
         id: systemTrayIcon
         property bool isWindowShown: false
         visible: true
-        icon.source: "qrc:/Resources/clock_icon.png"
+        icon.source: "qrc:/Resources/app_icon.png"
         onActivated: {
             isWindowShown = !isWindowShown;
             if (!isWindowShown) {
