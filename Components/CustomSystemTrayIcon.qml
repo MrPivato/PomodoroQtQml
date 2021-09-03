@@ -26,12 +26,12 @@ Item {
 
     SystemTrayIcon {
         id: systemTrayIcon
-        property bool mIsMinimized: false
+        property bool isWindowShown: false
         visible: true
         icon.source: "qrc:/Resources/clock_icon.png"
         onActivated: {
-            mIsMinimized = !mIsMinimized;
-            if (mIsMinimized) {
+            isWindowShown = !isWindowShown;
+            if (!isWindowShown) {
                 window.show();
                 window.raise();
                 window.requestActivate();
