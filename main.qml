@@ -15,36 +15,32 @@ Window {
     visible: true
     title: qsTr("Pomodoro")
 
-    property string pomodoroBkgColor: "#a0d911" //lime-6
-    property string pomodoroTimerChooserColor: "#7cb305" //lime-7
-    property string pomodoroClockFaceColor: "#bae637" //lime-5
-    property string pomodoroTextColor: "#ffffff" //white
-    //    property string pomodoroBtnBkg: "#f7f7f7" // unused?
+    // Colors from: https://ant.design/docs/spec/colors
+    property string pomodoroBkgColor: "#a0d911" // lime-6
+    property string pomodoroTimerChooserColor: "#7cb305" // lime-7
+    property string pomodoroClockFaceColor: "#bae637" // lime-5
+    property string pomodoroTextColor: "#ffffff" // white
 
-    property string shortBreakBkgColor: "#2f54eb"
-    property string shortBreakTimerChooserColor: "#1d39c4"
-    property string shortBreakClockFaceColor: "#597ef7"
-    property string shortBreakTextColor: "#ffffff"
-    //    property string shortBreakBtnBkg: "#f7f7f7"
+    property string shortBreakBkgColor: "#2f54eb" // geekblue-6
+    property string shortBreakTimerChooserColor: "#1d39c4" // geekblue-7
+    property string shortBreakClockFaceColor: "#597ef7" // geekblue-5
+    property string shortBreakTextColor: "#ffffff" // white
 
-    property string longBreakBkgColor: "#faad14"
-    property string longBreakTimerChooserColor: "#d48806"
-    property string longBreakClockFaceColor: "#ffc53d"
-    property string longBreakTextColor: "#ffffff"
-    //    property string longBreakBtnBkg: "#f7f7f7"
+    property string longBreakBkgColor: "#faad14" // gold-6
+    property string longBreakTimerChooserColor: "#d48806" // gold-7
+    property string longBreakClockFaceColor: "#ffc53d" // gold-5
+    property string longBreakTextColor: "#ffffff" // white
 
-    property string currentBkgColor: "#bfbfbf"
-    property string currentTimerChooserColor: "#8c8c8c"
-    property string currentClockFaceColor: "#d9d9d9"
-    property string currentTextColor: "#262626"
-    //    property string currentBtnBkg: "#f7f7f7"
+    property string currentBkgColor: "#bfbfbf" // gray-6
+    property string currentTimerChooserColor: "#8c8c8c" // gray-7
+    property string currentClockFaceColor: "#d9d9d9" // gray-5
+    property string currentTextColor: "#262626" // gray-10
 
     function setPomodoroAsCurrentColorScheme() {
         currentBkgColor = pomodoroBkgColor;
         currentTimerChooserColor = pomodoroTimerChooserColor;
         currentClockFaceColor = pomodoroClockFaceColor;
         currentTextColor = pomodoroTextColor;
-        //        currentBtnBkg = pomodoroBtnBkg;
     }
 
     function setShortBreakAsCurrentColorScheme() {
@@ -52,7 +48,6 @@ Window {
         currentTimerChooserColor = shortBreakTimerChooserColor;
         currentClockFaceColor = shortBreakClockFaceColor;
         currentTextColor = shortBreakTextColor;
-        //        currentBtnBkg = shortBreakBtnBkg;
     }
 
     function setLongBreakAsCurrentColorScheme() {
@@ -60,7 +55,6 @@ Window {
         currentTimerChooserColor = longBreakTimerChooserColor;
         currentClockFaceColor = longBreakClockFaceColor;
         currentTextColor = longBreakTextColor;
-        //        currentBtnBkg = longBreakBtnBkg;
     }
 
     Component.onCompleted: setPomodoroAsCurrentColorScheme();
@@ -115,7 +109,6 @@ Window {
                 mCfcTimerChooserColor: currentTimerChooserColor
                 mCfcClockFaceColor: currentClockFaceColor
                 mCfcTextColor: currentTextColor
-                //                mCfcBtnBkg: currentBtnBkg
             }
         }
 
