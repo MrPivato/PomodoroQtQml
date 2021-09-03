@@ -1,6 +1,4 @@
-# Pomodoro
-
-## Pomodoro App made with Qt and Qml
+# Pomodoro App made with Qt and Qml
 
 ## Screenshots
 
