@@ -71,7 +71,7 @@ Item {
                 CustomDial {
                     id: shortBreakTimerInput
                     width: parent.width * (20/100)
-                    height: width
+                    height: parent.height * (7/10)
                     anchors {
                         top: inputsTitle.bottom
                         horizontalCenter: parent.horizontalCenter
