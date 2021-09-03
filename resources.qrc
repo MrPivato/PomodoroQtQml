@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/clock_icon.png</file>
+        <file>Resources/gear_icon.png</file>
+        <file>Resources/beep.wav</file>
+    </qresource>
+</RCC>

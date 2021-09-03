@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Components/CustomButton.qml</file>
+        <file>Views/ClockFace.qml</file>
+        <file>Components/NavBar.qml</file>
+        <file>Views/Settings.qml</file>
+        <file>Components/CustomDial.qml</file>
+        <file>Components/CustomSystemTrayIcon.qml</file>
+    </qresource>
+</RCC>
