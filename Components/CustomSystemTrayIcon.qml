@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Qt.labs.platform 1.1
+import QtQuick.Window 2.3
 
 Item {
     id: customSystemTrayIconComponent
@@ -33,13 +34,17 @@ Item {
         visible: true
         icon.source: "qrc:/Resources/app_icon.png"
         onActivated: {
-            isWindowShown = !isWindowShown;
-            if (!isWindowShown) {
+            if(window.visibility === Window.Windowed
+                    || window.visibility === Window.FullScreen
+                    || window.visibility === Window.Maximized)
+            {
+                window.hide();
+            } else if(window.visibility === Window.Minimized
+                      || window.visibility === Window.Hidden)
+            {
                 window.show();
                 window.raise();
                 window.requestActivate();
-            } else {
-                window.hide();
             }
         }
         menu: Menu {
