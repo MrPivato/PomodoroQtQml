@@ -30,21 +30,24 @@ Item {
 
     SystemTrayIcon {
         id: systemTrayIcon
-        property bool isWindowShown: false
         visible: true
         icon.source: "qrc:/Resources/app_icon.png"
         onActivated: {
-            if(window.visibility === Window.Windowed
-                    || window.visibility === Window.FullScreen
-                    || window.visibility === Window.Maximized)
-            {
+            switch (window.visibility) {
+            case Window.Windowed:
+            case Window.FullScreen:
+            case Window.Maximized:
                 window.hide();
-            } else if(window.visibility === Window.Minimized
-                      || window.visibility === Window.Hidden)
-            {
+                break;
+            case Window.Minimized:
+            case Window.Hidden:
                 window.show();
                 window.raise();
                 window.requestActivate();
+                break;
+            default:
+                window.show();
+                break;
             }
         }
         menu: Menu {
